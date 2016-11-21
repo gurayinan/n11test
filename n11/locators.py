@@ -16,12 +16,10 @@ class N11LoginPageLocators(object):
 class N11SearchResultPageLocators(object):
     SEARCH_RESULT_TEXT = (By.CLASS_NAME, "resultText")
     RESULT_SECOND_PAGE = (By.CSS_SELECTOR, "//*[@id=\"contentListing\"]/div/div/div[2]/div[3]/a[2]")
-    SECOND_PAGE_ACTIVE = (By.CSS_SELECTOR, "a[href*=\"pg=2\"]:last.active")
-    THIRD_PROD_FOLLOW = (By.CSS_SELECTOR, ".column:eq(2) .followBtn")
     FAVORITES_BUTTON = (By.CSS_SELECTOR, "a[href*=\"hesabim/favorilerim\"]")
 
 
 class N11FavoriteProductsPageLocators(object):
-    DELETE_PRODUCT = (By.CSS_SELECTOR, ".removeSelectedProduct:first")
+    DELETE_PRODUCT = (By.CLASS_NAME, "removeSelectedProduct")
     EMPTY_WATCHLIST = (By.CLASS_NAME, "emptyWatchList")
 

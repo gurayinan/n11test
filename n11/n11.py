@@ -95,25 +95,30 @@ class N11SearchResultsPage(N11BasePage):
 
     def change_page(self):
         try:
-            self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight);')
-            self.wait.until(ec.element_to_be_clickable(N11SearchResultPageLocators.RESULT_SECOND_PAGE)).click()
-            #time.sleep(3)
-            #self.driver.execute_script('$.fancybox.close()')
-            #time.sleep(3)
-            #self.wait.until(ec.element_to_be_clickable(N11SearchResultPageLocators.RESULT_SECOND_PAGE)).click()
-            self.wait.until(ec.presence_of_element_located(N11SearchResultPageLocators.SECOND_PAGE_ACTIVE))
+            self.driver.execute_script('window.scrollTo(0,document.body.scrollHeight);') #to be able to see pagination
+            self.driver.execute_script('$.fancybox.close()') #for closing campaign shows on search page
+            pagination = self.driver.find_element_by_link_text('2')
+            pagination.click()
+            return self.driver.current_url
         except StandardError:
             raise
 
     def add_favorite_product(self):
         try:
-            self.wait.until(ec.element_to_be_clickable(N11SearchResultPageLocators.THIRD_PROD_FOLLOW)).click()
+            self.driver.execute_script('window.scrollTo(0, 500);')
+            third_prod = self.driver.find_element_by_css_selector('.followBtn:nth-child(3)')
+            third_prod.click()
         except StandardError:
             raise
 
     def navigate_to_favorites(self):
         try:
-            self.wait.until(ec.element_to_be_clickable(N11SearchResultPageLocators.FAVORITES_BUTTON)).click()
+            self.driver.execute_script('window.scrollTo(0, 0)')
+            hover_to_menu = self.driver.find_element_by_class_name('myAccount')
+            hover = ActionChains(self.driver).move_to_element(hover_to_menu)
+            hover.perform()
+            favorites_list = self.driver.find_element_by_link_text('Favorilerim')
+            favorites_list.click()
         except StandardError:
             raise
 
